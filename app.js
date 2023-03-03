@@ -7,7 +7,7 @@
 "use strict";
 //? Utilize the hotkey to hide block level comment documentation
 ////* Mac: Press "CMD"+"K" and then "CMD"+"/"
-////* PC: Press "CTRL"+"K" and then "CTRL"+"/"
+// * PC: Press "CTRL"+"K" and then "CTRL"+"/" 
 
 /**
  * This is the main logic function being called in index.html.
@@ -15,7 +15,7 @@
  * our user to decide whether to search by name or by traits.
  * @param {Array} people        A collection of person objects.
  */
-function app(people) {
+function app(people) {;
     // promptFor() is a custom function defined below that helps us prompt and validate input more easily
     // Note that we are chaining the .toLowerCase() immediately after the promptFor returns its value
     let searchType = promptFor(
@@ -27,8 +27,8 @@ function app(people) {
     switch (searchType) {
         case "yes":
             searchResults = searchByName(people);
-            break;
-        case "no":
+            break; 
+        case "no":  
             //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
                 //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
             searchResults = searchByTraits(people);
@@ -51,6 +51,7 @@ function app(people) {
  * @param {Array} people        A collection of person objects.
  * @returns {String}            The valid string input retrieved from the user.
  */
+
 function mainMenu(person, people) {
     // A check to verify a person was found via searchByName() or searchByTrait()
     if (!person[0]) {
@@ -140,6 +141,15 @@ function displayPeople(people) {
 function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n`;
     personInfo += `Last Name: ${person.lastName}\n`;
+    personInfo += `Gender: ${person.gender}\n`;
+    personInfo += `DOB: ${person.dob}\n`;
+    personInfo += `Height: ${person.height}\n`;
+    personInfo += `Weight: ${person.weight}\n`;
+    personInfo += `Eye Color: ${person.eyeColor}\n`;
+    personInfo += `Occupation: ${person.occupation}\n`;
+
+
+
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
     alert(personInfo);
 }
@@ -184,3 +194,44 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+// ( /5 points): As a developer, I want to run validation on any user input, ensuring that a user is
+//  re-prompted when they provide invalid input.
+
+
+// ( /10 points): As a user, I want to be able to search for someone based on a single criterion • 
+// You should be able to find and return a list of people who match the search
+
+function searchByTraits(people) {
+    let userInput = promptFor("Search for someone based on a single criterion: ", chars);
+    let foundresults = people.filter(function (person){
+        if (person.firstName === userInput &&
+            person.lastName === userInput &&
+            person.gender === userInput) {
+                return true;
+            }
+
+        });
+    return foundresults;
+
+}
+
+
+
+
+// ( /15 points): As a user, I want to be able to search for someone based on multiple
+//  traits (up to a maximum of five criteria at once).
+// • i.e., if you search for Gender: male and Eye Color: blue, you should get back a list of people who match the search. In this case, it will be only people who are male with blue eyes.
+
+// ( /10 points): As a user, I want to be able to look up someone’s information after 
+// I find them with the program (display values for the various traits of the found person).
+
+// ( /15 points): As a user, after locating a person, I want to see only that person’s descendants (display the names of the descendants).
+
+// ( /15 points): As a user, after locating a person, I want to see only that person’s immediate family members, displaying the names of the family members and their relation to the found person.
+
+// • i.e., parents, spouse, siblings
+
+// Bonus
+
+// ( /5 points): As a user, after locating a person, I want to see only that person’s descendants (display the names of the descendants), using recursion.
